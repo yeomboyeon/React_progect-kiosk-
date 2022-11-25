@@ -2,25 +2,15 @@ const express = require("express");
 const cors = require("cors");
 // const { useReducer } = require("react");
 
+const app = express();
+const port = 4000;
+
 // 세션 관리 미들웨어
 const session = require("express-session");
 
 // MYSQL 연결 설정
 const mysql = require("mysql2");
 const db = mysql.createPoolCluster();
-
-// mysql 연결(mysql 최초 호스트 연결설정 창과 동일하게)
-// "article_project", "변경 가능"
-db.add("article_project", {
-  host: "127.0.0.1",
-  user: "root",
-  password: "",
-  database: "article_project",
-  port: 3306,
-});
-
-const app = express();
-const port = 4000;
 
 // express 4.16 이후 버전 - POST, json 요청을 받기 위함
 app.use(express.json());
@@ -34,12 +24,24 @@ app.use(
   })
 );
 
+// mysql 연결(mysql 최초 호스트 연결설정 창과 동일하게)
+// "article_project", "변경 가능"
+db.add("article", {
+  host: "127.0.0.1",
+  user: "root",
+  password: "",
+  database: "article",
+  port: 3306,
+});
+
 // (3) 비동기를 동기로 변환, promise 객체로 묶기
 // (4) 너무 코드가 길기 때문에 함수로 빼서 관리 및 활용 필요
+// MYSQL에서 데이터베이스명 변경시 이곳에도 수정해야함.
+// db.add 위에 함수에도 데이터베이스명 변경해주기(동일하게)
 app.get("/", async (req, res) => {
   // console.log("11111"); // 동기로 변환 여부 확인
   const 데이터 = await new Promise(function (resolve, reject) {
-    db.getConnection("article_project", function (error, connection) {
+    db.getConnection("article", function (error, connection) {
       if (error) {
         console.log("데이터베이스 연결 오류", error);
         reject(true);
@@ -62,9 +64,11 @@ app.get("/", async (req, res) => {
 });
 
 // (4) 컬럼 실행할 때마다 추가해야하는 코드를 관리 하는 함수
+// MYSQL에서 데이터베이스명 변경시 이곳에도 수정해야함.
+// db.add 위에 함수에도 데이터베이스명 변경해주기(동일하게)
 function 디비실행(query) {
   return new Promise(function (resolve, reject) {
-    db.getConnection("article_project", function (error, connection) {
+    db.getConnection("article", function (error, connection) {
       if (error) {
         console.log("데이터베이스 연결 오류", error);
         reject(true);
