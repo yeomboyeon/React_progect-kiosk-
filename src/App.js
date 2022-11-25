@@ -4,6 +4,7 @@ import React from "react";
 import axios from "axios";
 import Login from "./pages/login.js";
 import Join from "./pages/join.js";
+import Write from "./pages/write.js";
 
 //session 설정 후 도메인이 다른 포트 번호와 쿠키 공유가 안되는데 공유 가능해짐
 axios.defaults.withCredentials = true;
@@ -18,10 +19,20 @@ console.clear();
  * 7. 서버 연동
  * 8. mysql 연동
  * 9. 세션정보 가져오기
+ * 10. 회원가입, 로그인 쿼리문 작성
+ * 11. loginUser 정보 불러와서 main 활용
+ * 12. 게시판(article) 만들고 db 생성
  */
 
 function Main() {
-  return <div>Main</div>;
+  const { loginUser } = React.useContext(StoreContext);
+  // console.log(loginUser); // loginUser 잘 가져오는지 확인
+
+  return (
+    <div>
+      <h2>{loginUser.nickname}님, 반갑습니다.</h2>
+    </div>
+  );
 }
 
 const StoreContext = React.createContext({});
@@ -46,6 +57,7 @@ function App() {
         <Route exact path="/" element={<Main />}></Route>
         <Route exact path="/join" element={<Join />}></Route>
         <Route exact path="/login" element={<Login />}></Route>
+        <Route exact path="/write" element={<Write />}></Route>
       </Routes>
     </StoreContext.Provider>
   );

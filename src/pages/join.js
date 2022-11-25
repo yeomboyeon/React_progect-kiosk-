@@ -12,6 +12,7 @@ function Join() {
   const [data, setData] = React.useState({
     id: "",
     pw: "",
+    nickname: "",
   });
 
   // 이벤트로 데이터 변경값 저장
@@ -60,6 +61,7 @@ function Join() {
     <div>
       <input type="text" name="id" onChange={데이터변경} />
       <input type="password" name="pw" onChange={데이터변경} />
+      <input type="text" name="nickname" onChange={데이터변경} />
       <button type="button" onClick={회원가입}>
         회원가입
       </button>
