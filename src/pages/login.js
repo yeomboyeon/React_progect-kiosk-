@@ -23,11 +23,9 @@ function Login() {
       data: data,
     })
       .then((res) => {
-        const { code, message } = res.data;
-        console.log(res.data);
+        alert(res.data.message);
 
         if (res.data.code === "success") {
-          alert(message);
           window.location.href = "/";
         }
       })
