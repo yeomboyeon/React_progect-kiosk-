@@ -24,6 +24,8 @@ function Write() {
       url: "http://localhost:4000/article",
       method: "POST",
       data: data,
+    }).then((res) => {
+      console.log(res.data);
     });
   };
 
