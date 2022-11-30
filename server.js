@@ -25,7 +25,7 @@ app.use(
 );
 
 // mysql 연결(mysql 최초 호스트 연결설정 창과 동일하게)
-// "article_project", "변경 가능"
+// "article", "변경 가능"
 db.add("article", {
   host: "127.0.0.1",
   user: "root",
