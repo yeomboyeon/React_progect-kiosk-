@@ -65,6 +65,7 @@ function Main() {
             <th>제목</th>
             <th>내용</th>
             <th>작성자</th>
+            <th>작성일</th>
           </tr>
         </thead>
         <tbody>
@@ -75,6 +76,7 @@ function Main() {
                   <td>{item.title}</td>
                   <td>{item.body}</td>
                   <td>{item.nickname}</td>
+                  <td>작성일 </td>
                 </tr>
               );
             })}
@@ -83,6 +85,10 @@ function Main() {
     </div>
   );
 }
+
+// 현재날짜 구현
+let today = new Date();
+console.log(today.toLocaleDateString() + today.toLocaleTimeString());
 
 const StoreContext = React.createContext({});
 

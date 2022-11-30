@@ -38,7 +38,10 @@ function Article() {
   };
 
   return (
-    <div className="ui-wrap">
+    <div
+      className="ui-wrap"
+      style={{ display: "flex", flexDirection: "column", padding: 20 }}
+    >
       <div className="ui-body-wrap">
         <h2>{article.title}</h2>
         <div className="ui-body">
