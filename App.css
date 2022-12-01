@@ -1,0 +1,166 @@
+html {
+  /* 영문이면 roboto가 적용되고, 한글이면 Noto Sans KR가 적용되도록 아래와 같은 순서로 배치 */
+  font-family: "Roboto", "Noto Sans KR", sans-serif;
+}
+
+/* 노말라이즈 */
+body, ul, li, h1 {
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+a {
+  color:inherit;
+  text-decoration:none;
+}
+
+.main {
+  background-color: rgb(47, 44, 44);
+  height: 750px;
+  width: 1600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.title{
+  height: 50px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*main-map-left*/
+.main-map-left {
+  border: 1px solid white;
+  height: 650px;
+  width: 900px;
+  color: white;
+  margin-left: 20px;
+}
+
+.left-배치도, .hi{
+margin-left: 20px;
+border-bottom-color: white;
+}
+
+.seat{
+  height: 600px;
+  width: 900px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.seat-main{
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 50px;
+
+}
+
+.seats{
+  height: 70px;
+  width: 70px;
+  background-color: antiquewhite;
+  color: black;
+  margin: 10px;
+  font-weight: bold;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 5px;
+}
+
+.seats-배정{
+ font-weight: normal;
+}
+
+.seat-sub{
+display: flex;
+margin-left: 50px;
+}
+
+.drawers, .rests{
+  height: 150px;
+  width: 200px;
+  background-color: antiquewhite;
+  color: black;
+  display: flex;    
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.rests {
+margin-left: 5px;
+width: 250px;
+}
+
+/*main-map-right*/
+.main-map-right {
+  border: 1px solid white;
+  height: 650px;
+  width: 600px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.join-menu{
+  height: 100px;
+  width: 600px;
+  display: flex;
+  align-items: center;
+}
+
+.join-menu > .menu {
+  margin: 10px;
+  background-color: black;
+  color: yellow;
+}
+.join-tips{
+  margin-left: 50px;
+  display: flex;
+  align-items: center;
+  color: white;
+  
+}
+.center-menu{
+  margin: 5px;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+}
+
+.menu {
+  border-radius: 10px;
+  height: 100px;
+  width: 170px;
+  margin: 5px;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  background-color: black;
+  text-align: center;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tips{
+  color: white;
+  margin-left: 20px;
+}
+
