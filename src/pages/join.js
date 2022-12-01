@@ -70,3 +70,34 @@ function Join() {
 }
 
 export default Join;
+
+// 전체 게시글 보여주기
+/* <div className="ui-wrap">
+      <h2>{loginUser.nickname}님, 반갑습니다.</h2>
+      <button className="ui-green-button" onClick={문의}>
+        글 등록
+      </button>
+      <table className="ui-table">
+        <thead>
+          <tr>
+            <th>제목</th>
+            <th>내용</th>
+            <th>작성자</th>
+            <th>작성일</th>
+          </tr>
+        </thead>
+        <tbody>
+          {article.length > 0 &&
+            article.map((item, index) => {
+              return (
+                <tr key={index}>
+                  <td>{item.title}</td>
+                  <td>{item.body}</td>
+                  <td>{item.nickname}</td>
+                  <td>작성일 </td>
+                </tr>
+              );
+            })}
+        </tbody>
+  </table>
+          </div> */

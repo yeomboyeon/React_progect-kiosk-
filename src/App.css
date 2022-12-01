@@ -1,38 +1,239 @@
-.App {
-  text-align: center;
+html {
+  /* 영문이면 roboto가 적용되고, 한글이면 Noto Sans KR가 적용되도록 아래와 같은 순서로 배치 */
+  font-family: "Roboto", "Noto Sans KR", sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* 노말라이즈 */
+body, ul, li, h1 {
+  margin:0;
+  padding:0;
+  list-style:none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+a {
+  color:inherit;
+  text-decoration:none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.main {
+  background-color: rgb(47, 44, 44);
+  height: 750px;
+  width: 1600px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white;
+}
+
+.title, .time{
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+img{
+  height: 50px;
+  width: 50px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.intro_cont_divider {
+  width: 100%;
+  height: 2px;
+  background-color: #fafafa;
 }
+
+/*main-map-left*/
+.main-map-left {
+  border-right: 1px solid white;
+  height: 650px;
+  width: 900px;
+  color: white;
+  margin-left: 20px;
+}
+
+.left-배치도, .hi{
+margin-left: 20px;
+border-bottom-color: white;
+}
+
+.seat{
+  height: 600px;
+  width: 900px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.seat-main{
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 50px;
+}
+
+.seats{
+  height: 70px;
+  width: 70px;
+  background-color: antiquewhite;
+  color: black;
+  margin: 10px;
+  font-weight: bold;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.seats:hover {
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .5), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+}
+
+.seats-배정{
+ font-weight: normal;
+}
+
+.seat-sub{
+display: flex;
+margin-left: 50px;
+}
+
+.drawers{
+  margin-left: 9px;
+}
+
+.drawers, .rests{
+  height: 150px;
+  width: 200px;
+  background-color: antiquewhite;
+  color: black;
+  display: flex;    
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.rests {
+margin-left: 5px;
+width: 250px;
+}
+
+.legend{
+  display: flex;
+  height: 140px;
+  margin: 10px;
+  margin-left: 200px;
+}
+
+.legends{
+  text-align: center;
+  margin: 5px;
+}
+
+.범례묶기 {
+  display: flex;
+
+}
+.legends-표시{
+height: 30px;
+width: 30px;
+background-color: antiquewhite;
+border-radius: 5px;
+margin: 3px;
+}
+
+.legends-표시글자{
+  margin-left: 3px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.범례묶기:nth-child(2) > .legends-표시{
+  background-color:brown;
+  border-radius: 5px;
+  }
+
+  .범례묶기:nth-child(3) > .legends-표시{
+  background-color:aquamarine;
+  border-radius: 5px;
+  }
+
+/*main-map-right*/
+.main-map-right {
+  height: 650px;
+  width: 600px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.join-menu{
+  height: 100px;
+  width: 600px;
+  display: flex;
+  align-items: center;
+}
+
+.join-menu > .menu {
+  margin: 10px;
+  background-color: black;
+  color: yellow;
+}
+
+.join-tips{
+  margin-left: 50px;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.hp{
+  color: white;
+  text-align: right;
+  margin-right: 5px;
+}
+
+.center-menu{
+  margin: 5px;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
+}
+
+.menu {
+  border-radius: 10px;
+  height: 100px;
+  width: 170px;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  background-color: black;
+  text-align: center;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.menu:hover {
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .5), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+}
+
+.tips{
+  color: white;
+  margin-left: 20px;
+}
+
