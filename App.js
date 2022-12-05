@@ -7,6 +7,7 @@ import Join from "./pages/join.js";
 import Write from "./pages/write.js";
 import Article from "./pages/article.js";
 import Notice from "./pages/notice.js";
+import Kakao from "./pages/kakao.js";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 dayjs.locale("ko");
@@ -39,7 +40,7 @@ console.clear();
  * ----(진행중) - 다른 js 파일의 css 적용은 어디에서?
  * ----(진행중) - 유의사항페이지(깔끔하게 추가하기)
  * ----(함수 구현 추가 요망)
- *     현재시간(dayjs 활용) 구현은 했으나, 새로고침 안해도 시간이 가도록 구현 필요
+ * ----(완료) - 현재시간(dayjs 활용), 새로고침안해도 가도록. (Intercval)
  *     좌석 내부 배정시간에 따라 off → on으로 바꾸기
  *     좌석 내부 00:00 배정시간 함수 구현(기본은 안나오도록)
  *     로그인 완료 후 메인페이지에 성명(0000) 출력되도록 하기
@@ -48,24 +49,48 @@ console.clear();
 
 function Main() {
   const navigation = useNavigate();
-
   const { loginUser } = React.useContext(StoreContext);
   // console.log(loginUser); // loginUser 잘 가져오는지 확인
+  
+  //현재시간 구현(시간이라서 당연히 State 안해도 되는줄;;;)
+  const baseDate = dayjs().format("YYYY-MM-DD.(ddd), HH:mm:ss");
+  const [dateTime, setDateTime] = React.useState(baseDate);
 
-  // 게시판 전체 가져와서 main페이지에 출력
-  // const [article, setArticle] = React.useState([]);
+  React.useEffect(() => {
+    const dateInterval = setInterval(() => {
+      const date = dayjs().format("YYYY-MM-DD.(ddd), HH:mm:ss");
+      setDateTime(date);
+    }, 1000);
 
-  // const 게시글정보가져오기 = async () => {
-  //   await axios({
-  //     url: "http://localhost:4000/article",
-  //   }).then((res) => {
-  //     setArticle(res.data);
-  //   });
-  // };
+    return () => {
+      clearInterval(dateInterval);
+    } 
+  },[])
 
-  // React.useEffect(() => {
+//   // 공공데이터포털API 가져오기
+//   const 공공데이터포털가져오기 = async () => {
+//     await axios({
+//       url: "https://apis.data.go.kr/5690000/sjTraditionalMarket1/sj_00000889",
+//       method: "GET",
+//       params: {
+//         serviceKey : 'XqLsAiA6Vl0z5wTPisARsPp9cgE3agyLxS6uj1BBke8x5fZSNEUKNEjj0Wq4bh8TrbRgnf53ot82Fax5btjw9Q==',
+//   pageIndex : 1,
+//   pageUnit : 20,
+// dataTy : 'json',
+// searchCondition : 'ty_Se',
+// searchKeyword : '5일장',
+//       }
+//     }).then((res) => {
+//     console.log(res);
+//   })
+// }
+//   React.useEffect(() => {
+//     공공데이터포털가져오기();
+//   })
+
+  //   React.useEffect(() => {
   //   // alert("실행 여부 확인");
-  //   게시글정보가져오기();
+  //   로그인정보가져오기();
   // }, []);
 
   const 문의 = () => {
@@ -103,7 +128,7 @@ function Main() {
               <h4>무인스터디카페에 오신 것을 환영합니다.</h4>
             </div>
             <div className="time">
-              {dayjs().format("YYYY-MM-DD.(ddd), HH:mm:ss")}
+              {dateTime}
             </div>
           </div>
           <div className="intro_cont_divider"></div>
@@ -378,6 +403,7 @@ function App() {
         <Route exact path="/write" element={<Write />}></Route>
         <Route exact path="/article/:seq" element={<Article />}></Route>
         <Route exact path="/notice" element={<Notice />}></Route>
+        <Route exact path="/kakao" element={<Kakao />}></Route>
       </Routes>
     </StoreContext.Provider>
   );

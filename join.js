@@ -64,13 +64,28 @@ function Join() {
 
   // name 활용, event.target.name으로 받은 데이터를 onChange{데이터변경}로 받아오기
   return (
-    <div>
-      <input type="text" name="id" placeholder='ID를 입력하세요.' onChange={데이터변경} />
-      <input type="date" name="pw" onChange={데이터변경} />
-      <input type="text" name="phoneNumber" placeholder='휴대폰 번호를 입력하세요.' onChange={데이터변경} />
+    <div className='join-box'>
+      <h2>Login</h2>
+       <form>
+    <div class="user-box">
+          <input type="text" name="id" onChange={데이터변경} />
+                <label>Username</label>
+
+        </div>  
+    <div class="user-box">    
+          <input type="date" name="pw" onChange={데이터변경} />
+                <label>Username</label>
+
+        </div>  
+        <div class="user-box">    
+          <input type="text" name="phoneNumber" onChange={데이터변경} />
+                <label>Username</label>
+
+          </div>  
       <button type="button" onClick={회원가입}>
         회원가입
-      </button>
+        </button>
+        </form>
     </div>
   );
 }
