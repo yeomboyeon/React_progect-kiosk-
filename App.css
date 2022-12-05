@@ -15,6 +15,14 @@ a {
   text-decoration:none;
 }
 
+/*최종 부모*/
+#root{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*메인 페이지*/
 .main {
   background-color: rgb(47, 44, 44);
   height: 750px;
@@ -25,34 +33,88 @@ a {
   justify-content: center;
 }
 
+/*전체 플렉스*/
 .flex{
   display: flex;
   justify-content: center;
   align-items: center;
-  
-}
-.title{
-  height: 50px;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: 1px solid white;
+  border-radius: 10px;
 }
 
-/*main-map-left*/
-.main-map-left {
-  border: 1px solid white;
+/*제목, 현재시간*/
+.title, .time, .loginUser{
+  color: white;
+}
+
+/*제목, 로그인유저 플랙스*/
+.title-Set{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+/*제목 옆 로그인유저*/
+.loginUser{
+  font-size: 1.2rem;
+  margin-left: 200px;
+}
+
+/*이미지*/
+img{
+  height: 30px;
+  width: 30px;
+  margin-right: 5px;
+}
+
+/*하단 라인*/
+.intro_cont_divider {
+  width: 100%;
+  height: 2px;
+  background-color: #fafafa;
+}
+
+/*----------------좌측------------------------*/.main-map-left {
+  border-right: 1px solid white;
   height: 650px;
   width: 900px;
   color: white;
+}
+
+/*좌상단 태그 디스플레이*/
+.time, .hi, .left-배치도{
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/*현재시간*/
+.time {
+  margin-left: 45px;
+  font-size: 20px;
+}
+
+/*좌석 배치도 제목*/
+.left-배치도{
   margin-left: 20px;
 }
 
-.left-배치도, .hi{
-margin-left: 20px;
-border-bottom-color: white;
+/*좌상단 환영글*/
+.hi{
+  margin-left: 80px;  
+}
+  
+/*좌측 플렉스*/
+.flex-left{
+  display: flex;  
+  flex-wrap: wrap;
+  height: 100px;
 }
 
+/*좌중앙 총괄*/
 .seat{
   height: 600px;
   width: 900px;
@@ -60,13 +122,20 @@ border-bottom-color: white;
   flex-wrap: wrap;
 }
 
+/*좌중앙 세부총괄*/
 .seat-main{
   display: flex;
   flex-wrap: wrap;
-  margin-left: 50px;
-
 }
 
+/*소화기,카메라*/
+.소화기-카메라{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/*좌석*/
 .seats{
   height: 70px;
   width: 70px;
@@ -80,17 +149,99 @@ border-bottom-color: white;
   justify-content: center;
   flex-direction: column;
   border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 5px 0px 0px wheat;
 }
 
-.seats-배정{
- font-weight: normal;
+/*좌석 아이콘 마우스 선택시 효과*/
+.seats:hover {
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .5), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+    background-color: aquamarine;
 }
 
+/*배정되었을 때 바뀔 태그*/
+.seats::after {
+  box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, .5),
+    -4px -4px 6px 0 rgba(116, 125, 136, .5),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, .2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+    background-color: brown;
+}
+
+/*좌석 1번, 17번*/
+.seat-main > .seats:nth-child(2),
+.seat-main>.seats:nth-child(20) {
+margin-left: 25px;
+}
+
+/*좌석 9번*/
+.seat-main > .seats:nth-child(11){
+  margin-left: 85px;
+}
+
+/*좌석 16번*/
+.seat-main>.seats:nth-child(18) {
+  margin-right: 85px;
+}
+
+
+/*좌석 off, 배정시간*/
+.seats-on, .seats-배정{
+  font-weight: normal;
+}
+
+/*좌 중앙 총괄*/
 .seat-sub{
-display: flex;
-margin-left: 50px;
+  display: flex;
+  height: 220px;
+  width: 100%;
+  margin-left: 75px;
 }
 
+/*사물함,휴게실 앞 소화기*/
+.drawer > .소화기-카메라,
+.rest > .소화기-카메라 {
+display: flex;
+flex-direction: row;
+margin-top: 1px;
+margin-left: 10px;
+justify-content: flex-start;
+}
+
+/*현위치*/
+.현위치{
+color: red;
+font-weight: bold;
+display: flex;
+margin-left: 20px;
+margin-top: 30px;
+flex-direction: column;
+align-items:center;
+justify-content: center;
+}
+
+/*좌석 1,17번 옆 소화기,카메라*/
+.seat-main>.소화기-카메라:nth-child(1),
+.seat-main>.소화기-카메라:nth-child(19) {
+  margin-left: 5px;
+  margin-right: 20px;
+}
+
+/*좌석 8,24번 옆 소화기,카메라*/
+.seat-main>.소화기-카메라:nth-child(10),
+.seat-main>.소화기-카메라:nth-child(28) {
+  margin-left:60px;
+}
+
+/*사물함*/
+.drawers{
+  margin-left: 9px;
+}
+
+/*사물함, 휴게실*/
 .drawers, .rests{
   height: 150px;
   width: 200px;
@@ -102,14 +253,62 @@ margin-left: 50px;
   font-weight: bold;
 }
 
+/*휴게실*/
 .rests {
 margin-left: 5px;
 width: 250px;
 }
 
-/*main-map-right*/
+/*범례 총괄*/
+.legend{
+  display: flex;
+  height: 100%;
+  margin: 10px;
+}
+
+/*범례 세부총괄*/
+.legends{
+  text-align: center;
+  margin-top: 60px;
+  margin-left: 110px;
+}
+
+/*범례*/
+.범례묶기 {
+  display: flex;
+}
+
+/*범례*/
+.legends-표시{
+height: 30px;
+width: 30px;
+background-color: antiquewhite;
+border-radius: 5px;
+margin: 3px;
+}
+
+/*범례 글자*/
+.legends-표시글자{
+  margin-left: 3px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/*사용중인 좌석*/
+.범례묶기:nth-child(2) > .legends-표시{
+  background-color:brown;
+  border-radius: 5px;
+}
+
+/*선택한 좌석*/
+.범례묶기:nth-child(3) > .legends-표시{
+  background-color:aquamarine;
+  border-radius: 5px;
+  }
+
+/*----------------우측------------------------*/
 .main-map-right {
-  border: 1px solid white;
   height: 650px;
   width: 600px;
   display: flex;
@@ -118,37 +317,54 @@ width: 250px;
   justify-content: space-around;
 }
 
+.main-map-right img {
+  width: 50px;  
+  height: 50px;
+}
+
+/*우상단 디스플레이*/
 .join-menu{
   height: 100px;
-  width: 600px;
+  width: 100%;
   display: flex;
   align-items: center;
 }
 
+/*우상단 회원가입 메뉴 아이콘*/
 .join-menu > .menu {
   margin: 10px;
   background-color: black;
   color: yellow;
+  font-weight: bold;
 }
+
+/*우상단 첫이용 설명*/
 .join-tips{
-  margin-left: 50px;
+  margin-left: 10px;
   display: flex;
   align-items: center;
   color: white;
-  
-}
-.center-menu{
-  margin: 5px;
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: space-between;
 }
 
+/*주소,연락처*/
+.hp{
+  color: white;
+  text-align: right;
+  margin-right: 5px;
+}
+
+/*우중앙 디스플레이*/
+.center-menu{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+/*메뉴 아이콘 효과*/
 .menu {
   border-radius: 10px;
   height: 100px;
   width: 170px;
-  margin: 5px;
   margin-bottom: 20px;
   font-size: 1.3rem;
   background-color: black;
@@ -157,10 +373,40 @@ width: 250px;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
-.tips{
+/*메뉴 아이콘 마우스 선택시 효과*/
+.menu:hover {
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .5), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+}
+
+/*이용방법*/
+.tips, .tips-설명{
   color: white;
   margin-left: 20px;
 }
 
+/*이용방법 설명 글자 간격*/
+.tips-설명 {
+  line-height:30px;
+  display: flex;
+}
+
+/*유의사항 버튼*/
+.유의사항버튼{
+margin-left: 160px;
+}
+
+/*----------------notice 페이지----------------------*/
+.유의사항{
+  color: white;
+  width: 1000px;
+  font-size: 1.2rem;
+  border: 1px solid black;
+  padding: 5px;
+  background-color:black;
+}
