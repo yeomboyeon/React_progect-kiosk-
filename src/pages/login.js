@@ -36,8 +36,19 @@ function Login() {
 
   return (
     <div>
-      <input type="text" name="id" onChange={데이터변경} />
-      <input type="password" name="pw" onChange={데이터변경} />
+      <input
+        type="text"
+        name="id"
+        placeholder="ID를 입력하세요."
+        onChange={데이터변경}
+      />
+      <input type="date" name="pw" onChange={데이터변경} />
+      <input
+        type="text"
+        name="phoneNumber"
+        placeholder="휴대폰 번호를 입력하세요."
+        onChange={데이터변경}
+      />
       <button type="button" onClick={로그인}>
         로그인
       </button>

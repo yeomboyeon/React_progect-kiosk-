@@ -5,6 +5,11 @@ import { useNavigate } from "react-router-dom";
 // 3번 회원가입 설정
 // useState 저장(필요한 데이터는 id, pw를 객체화)
 // 회원가입하고 메인 페이지로 이동하기(네비게이션)
+/*
+  이름, 주민번호 앞자리, 휴대폰번호(패스워드)로 가입
+  화면에 표시될 때에는 이름:염*연, 폰 뒷자리 4개 : 8455만 나오도록 하기
+   */
+
 function Join() {
   const navigation = useNavigate();
 
@@ -12,7 +17,7 @@ function Join() {
   const [data, setData] = React.useState({
     id: "",
     pw: "",
-    nickname: "",
+    phoneNumber: "",
   });
 
   // 이벤트로 데이터 변경값 저장
@@ -58,13 +63,31 @@ function Join() {
 
   // name 활용, event.target.name으로 받은 데이터를 onChange{데이터변경}로 받아오기
   return (
-    <div>
-      <input type="text" name="id" onChange={데이터변경} />
-      <input type="password" name="pw" onChange={데이터변경} />
-      <input type="text" name="nickname" onChange={데이터변경} />
-      <button type="button" onClick={회원가입}>
-        회원가입
-      </button>
+    <div className="join-box">
+      <h2>Login</h2>
+      <form>
+        <div class="user-box">
+          <input type="text" name="id" onChange={데이터변경} />
+          <label>회원아이디</label>
+        </div>
+        <div class="user-box">
+          <input type="date" name="pw" onChange={데이터변경} />
+          <label>생년월일</label>
+        </div>
+        <div class="user-box">
+          <input type="text" name="phoneNumber" onChange={데이터변경} />
+          <label>휴대폰번호</label>
+        </div>
+        <a href="#">
+          <button type="button" onClick={회원가입}>
+            회원가입
+          </button>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </a>
+      </form>
     </div>
   );
 }
