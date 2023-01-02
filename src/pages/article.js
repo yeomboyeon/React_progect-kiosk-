@@ -6,6 +6,19 @@ function Article() {
   const { seq } = useParams();
   const { article, setArticle } = React.useState({});
 
+  const 게시글정보가져오기 = async () => {
+    await axios({
+      url: "http://localhost:4000/article",
+    }).then((res) => {
+      setArticle(res.data);
+    });
+  };
+
+  React.useEffect(() => {
+    alert("실행 여부 확인");
+    게시글정보가져오기();
+  }, []);
+
   const 게시판상세정보가져오기 = async () => {
     await axios({
       url: "http://localhost:4000/article_row",

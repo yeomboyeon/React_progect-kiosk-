@@ -7,14 +7,14 @@ import Join from "./pages/join.js";
 import Write from "./pages/write.js";
 import Article from "./pages/article.js";
 import Notice from "./pages/notice.js";
-import Kakao from "./pages/kakao.js";
 import Locker from "./pages/locker.js";
+import SeatAssignment from "./pages/seatAssignment.js";
+import TimeExtension from "./pages/timeExtension.js";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 dayjs.locale("ko");
 
-//session 설정 후 도메
-// 인이 다른 포트 번호와 쿠키 공유가 안되는데 공유 가능해짐
+//session 설정 후 도메인이 다른 포트 번호와 쿠키 공유가 안되는데 공유 가능해짐
 axios.defaults.withCredentials = true;
 
 console.clear();
@@ -35,22 +35,25 @@ console.clear();
  * 15. (진행중) - 메인페이지 화면 구현중
  * ----(완료) - 이미지가 왜깨지지...(경로 설정 오류?)
  *    >>>>> 해결! <img src={require('./images/시간연장.png')} alt="" />
- * ----(진행중) - 사용중, 선택한 좌석 표시 CSS 넣기
- * ----(진행중) - 깔끔하게 화면 구성
- * ----(진행중) - 다른 js 파일의 css 적용은 어디에서? >>> App.css
- * ----(진행중) - 유의사항 페이지(깔끔하게 추가하기)
- * ----(진행중) - 사물함이용 페이지
+ * ----(완료) - 사용중, 선택한 좌석 표시 CSS 넣기
+ * ----(완료) - 깔끔하게 화면 구성
+ * ----(완료) - 다른 js 파일의 css 적용은 어디에서? >>> App.css
+ * ----(완료) - 유의사항 페이지(깔끔하게 추가하기)
+ * ----(완료) - 사물함이용 페이지
  * ----(함수 구현 추가 요망)
  * ----(완료) - 현재시간(dayjs 활용), 새로고침안해도 가도록. (Intercval)
  *     좌석 내부 배정시간에 따라 off → on으로 바꾸기
  *     좌석 내부 00:00 배정시간 함수 구현(기본은 안나오도록)
  *     로그인 완료 후 메인페이지에 성명(0000) 출력되도록 하기
  *     각 메뉴 선택시 관련 선택창 구현
+ *
+ *  div를 2번 쓰면 안되고 최상위 태그로 활용하기 위한 방법, 아무 의미없는 태그입니다.
+ *  <React.Fragment> </React.Fragment>
  */
 
-function Main() {
+function Main({ seats }) {
   const navigation = useNavigate();
-  const { loginUser } = React.useContext(StoreContext);
+  const { loginUser, setGlobalModal } = React.useContext(StoreContext);
   // console.log(loginUser); // loginUser 잘 가져오는지 확인
 
   //현재시간 구현(시간이라서 당연히 State 안해도 되는줄;;;)
@@ -68,55 +71,65 @@ function Main() {
     };
   }, []);
 
-  //   // 공공데이터포털API 가져오기
-  //   const 공공데이터포털가져오기 = async () => {
-  //     await axios({
-  //       url: "https://apis.data.go.kr/5690000/sjTraditionalMarket1/sj_00000889",
-  //       method: "GET",
-  //       params: {
-  //         serviceKey : 'XqLsAiA6Vl0z5wTPisARsPp9cgE3agyLxS6uj1BBke8x5fZSNEUKNEjj0Wq4bh8TrbRgnf53ot82Fax5btjw9Q==',
-  //   pageIndex : 1,
-  //   pageUnit : 20,
-  // dataTy : 'json',
-  // searchCondition : 'ty_Se',
-  // searchKeyword : '5일장',
-  //       }
-  //     }).then((res) => {
-  //     console.log(res);
-  //   })
-  // }
-  //   React.useEffect(() => {
-  //     공공데이터포털가져오기();
-  //   })
-
-  //   React.useEffect(() => {
-  //   // alert("실행 여부 확인");
-  //   로그인정보가져오기();
-  // }, []);
+  // 모달창 보여주기
+  const 자리배정모달보여줘 = () => {
+    setGlobalModal({
+      show: true,
+      type: "seatAssignment",
+    });
+    // alert('zSd')
+  };
 
   const 문의 = () => {
-    navigation("/write");
+    setGlobalModal({
+      show: true,
+      type: "write",
+    });
   };
 
   const 로그인 = () => {
-    navigation("/login");
+    setGlobalModal({
+      show: true,
+      type: "login",
+    });
   };
 
   const 회원가입 = () => {
-    navigation("/join");
+    setGlobalModal({
+      show: true,
+      type: "join",
+    });
   };
 
   const 유의사항 = () => {
-    navigation("/notice");
+    setGlobalModal({
+      show: true,
+      type: "notice",
+    });
+  };
+
+  const 사물함사용 = () => {
+    setGlobalModal({
+      show: true,
+      type: "locker",
+    });
+  };
+
+  const 시간연장 = () => {
+    setGlobalModal({
+      show: true,
+      type: "timeExtension",
+    });
   };
 
   return (
     <div className="main">
       <div className="title-Set">
         <div className="title">
-          <h1>무인스터디카페 세종점</h1>
+          <h1>무인스터디카페 (세종점)</h1>
         </div>
-        <div className="loginUser">염*연(8455) 님 환영합니다.</div>
+        <div className="loginUser"> {loginUser.id}</div>
+        <div className="loginUser"> 님 환영합니다.</div>
       </div>
       <div className="flex">
         <div className="main-map-left">
@@ -136,114 +149,25 @@ function Main() {
                 <img src={require("./images/카메라.png")} alt="" />
                 <img src={require("./images/소화기.png")} alt="" />
               </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>1
-                <div className="seats-배정">00:00</div>
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>2
-                <div className="seats-배정">00:00</div>
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>3
-                <div className="seats-배정">00:00</div>
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>4
-                <div className="seats-배정">00:00</div>
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>5
-                <div className="seats-배정">00:00</div>
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>6
-                <div className="seats-배정">00:00</div>
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>7
-                <div className="seats-배정">00:00</div>
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>8
-                <div className="seats-배정">00:00</div>
-              </div>
-              <div className="소화기-카메라">
-                <img src={require("./images/카메라.png")} alt="" />
-                <img src={require("./images/소화기.png")} alt="" />
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>9
-                <div className="seats-배정">00:00</div>
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>
-                10<div className="seats-배정">00:00</div>
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>
-                11<div className="seats-배정">00:00</div>
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>
-                12<div className="seats-배정">00:00</div>
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>
-                13<div className="seats-배정">00:00</div>
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>
-                14<div className="seats-배정">00:00</div>
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>
-                15<div className="seats-배정">00:00</div>
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>
-                16<div className="seats-배정">00:00</div>
-              </div>
-              <div className="소화기-카메라">
-                <img src={require("./images/카메라.png")} alt="" />
-                <img src={require("./images/소화기.png")} alt="" />
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>
-                17<div className="seats-배정">00:00</div>
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>
-                18<div className="seats-배정">00:00</div>
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>
-                19<div className="seats-배정">00:00</div>
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>
-                20<div className="seats-배정">00:00</div>
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>
-                21<div className="seats-배정">00:00</div>
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>
-                22<div className="seats-배정">00:00</div>
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>
-                23<div className="seats-배정">00:00</div>
-              </div>
-              <div className="seats">
-                <div className="seats-on">Off</div>
-                24<div className="seats-배정">00:00</div>
-              </div>
-              <div className="소화기-카메라">
-                <img src={require("./images/카메라.png")} alt="" />
-                <img src={require("./images/소화기.png")} alt="" />
-              </div>
+              {seats &&
+                seats.map((item, index) => {
+                  const 소화기배치 = item.number % 8 === 0 ? true : false;
+                  return (
+                    <React.Fragment key={`seats-${index}`}>
+                      <div className="seats">
+                        <div className="seats-on">{item.state}</div>
+                        {item.number}
+                        <div className="seats-배정">{item.date}</div>
+                      </div>
+                      {소화기배치 && (
+                        <div className="소화기-카메라">
+                          <img src={require("./images/카메라.png")} alt="" />
+                          <img src={require("./images/소화기.png")} alt="" />
+                        </div>
+                      )}
+                    </React.Fragment>
+                  );
+                })}
             </div>
             <div className="seat-sub">
               <div className="drawer">
@@ -302,7 +226,11 @@ function Main() {
           <div class="intro_cont_divider"></div>
           <div className="center-menu">
             <div className="button-set">
-              <button type="button" className="menu">
+              <button
+                type="button"
+                className="menu"
+                onClick={자리배정모달보여줘}
+              >
                 <img src={require("./images/자리배정.png")} alt="" />
                 자리배정
               </button>
@@ -318,14 +246,14 @@ function Main() {
               </button>
             </div>
             <div className="button-set">
-              <button type="button" className="menu">
+              <button type="button" className="menu" onClick={사물함사용}>
                 <img src={require("./images/사물함.png")} alt="" />
                 사물함 <br />
-                사용
+                배정
               </button>
             </div>
             <div className="button-set">
-              <button type="button" className="menu">
+              <button type="button" className="menu" onClick={시간연장}>
                 <img src={require("./images/시간연장.png")} alt="" />
                 시간연장/
                 <br />
@@ -367,9 +295,9 @@ function Main() {
               </div>
             </div>
             <div className="hp">
-              세종 집현서로00 무인스터디카페
+              주소 : 세종 집현서로00 무인스터디카페(세종점)
               <br />
-              문의전화 010-0000-8455
+              문의전화 : 010-0000-8455
             </div>
           </div>
         </div>
@@ -378,10 +306,14 @@ function Main() {
   );
 }
 
-const StoreContext = React.createContext({});
+export const StoreContext = React.createContext({});
 
 function App() {
   const [loginUser, setLoginUser] = React.useState({});
+  const [globalModal, setGlobalModal] = React.useState({
+    show: false,
+    type: null,
+  });
 
   const 세션정보가져오기 = async () => {
     await axios({
@@ -398,55 +330,64 @@ function App() {
   function 카카오데이터받는곳() {
     return <div>카카오 데이터 받는 곳</div>;
   }
+
+  const [seats, setSeats] = React.useState([]);
+  React.useEffect(() => {
+    const seats = [];
+
+    for (let i = 1; i <= 24; i++) {
+      seats.push({
+        number: i,
+        date: "00:00",
+        state: "Off",
+      });
+    }
+    setSeats(seats);
+  }, []);
+
   return (
-    <StoreContext.Provider value={{ loginUser }}>
+    <StoreContext.Provider value={{ loginUser, setGlobalModal }}>
       <Routes>
-        <Route exact path="/" element={<Main />}></Route>
+        <Route exact path="/" element={<Main seats={seats} />}></Route>
         <Route exact path="/join" element={<Join />}></Route>
         <Route exact path="/login" element={<Login />}></Route>
         <Route exact path="/write" element={<Write />}></Route>
         <Route exact path="/article/:seq" element={<Article />}></Route>
         <Route exact path="/notice" element={<Notice />}></Route>
-        <Route exact path="/kakao" element={<Kakao />}></Route>
         <Route exact path="/locker" element={<Locker />}></Route>
+        <Route exact path="/timeExtension" element={<TimeExtension />}></Route>
+        <Route
+          exact
+          path="/seatAssignment"
+          element={<SeatAssignment />}
+        ></Route>
         <Route
           exact
           path="/oauth/callback/kakao"
           element={<카카오데이터받는곳 />}
         ></Route>
       </Routes>
+      {globalModal.show && (
+        <div className="modal">
+          {
+            {
+              seatAssignment: (
+                <SeatAssignment seats={seats} setSeats={setSeats} />
+              ),
+              notice: <Notice />,
+              join: <Join />,
+              login: <Login />,
+              write: <Write />,
+              locker: <Locker />,
+              timeExtension: (
+                <TimeExtension seats={seats} setSeats={setSeats} />
+              ),
+            }[globalModal.type]
+          }
+        </div>
+      )}
     </StoreContext.Provider>
   );
 }
 
 export default App;
-/*
-      <div className="ui-wrap">
-        <h2>{loginUser.nickname}님, 반갑습니다.</h2>
-        <button className="ui-green-button" onClick={문의}>
-          글 등록
-        </button>
-        <table className="ui-table">
-          <thead>
-            <tr>
-              <th>제목</th>
-              <th>내용</th>
-              <th>작성자</th>
-              <th>작성일</th>
-            </tr>
-          </thead>
-          <tbody>
-            {article.length > 0 &&
-              article.map((item, index) => {
-                return (
-                  <tr key={index}>
-                    <td>{item.title}</td>
-                    <td>{item.body}</td>
-                    <td>{item.nickname}</td>
-                    <td>작성일 </td>
-                  </tr>
-                );
-              })}
-          </tbody>
-        </table>
-      </div> */
